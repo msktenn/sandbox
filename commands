@@ -1,0 +1,46 @@
+docker login -u msktenn1 -p RF7R85am9j57
+docker pull elasticsearch
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch
+docker run --name kibana -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana
+docker run --link http://dceqlatldg02.dce.insightglobal.net:9200:elasticsearch -d kibana -p 5601:5601
+docker-compose up
+docker run --link http://dceqlatldg02.dce.insightglobal.net:9200:elasticsearch -d kibana -p 5601:5601
+docker run --link "http://dceqlatldg02.dce.insightglobal.net:9200":elasticsearch -d kibana -p 5601:5601
+docker run --name kibana -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana...
+docker run --name kibana466 -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana:4.6.6...
+
+.\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=./candidatev3map.json --type=mapping
+.\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=./candidatev3data.json --type=data
+
+.\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/restrak-user --output=./restrakusermap.json --type=mapping
+.\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/restrak-user --output=./restrakuserdata.json --type=data
+
+.\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=./candidatev3data_500.json --type=data --size=1
+
+
+.\node_modules\.bin\elasticdump.cmd --input=./candidatev3map.json --output=http://127.0.0.1:9200/candidate-v3 --type=mapping
+.\node_modules\.bin\elasticdump.cmd --input=./candidatev3data_500.json --output=http://127.0.0.1:9200/candidate-v4 --type=data --limit=20
+
+{"daxtra_resume.Resume.StructuredResume.ContactMethod.InternetEmailAddress_main": "MarandaStroz@gmail.com"}
+{
+    "query": {
+        "match": {
+            "contactInfo.email": "MarandaStroz@gmail.com"
+        }
+    }
+}
+"0659836295430377"
+
+{
+    "query": {
+        "match": {
+            "resumes.FileStruct.attachment.fname": "0722302411121145"
+        }
+    }
+}
+
+"chanel.angione@yahoo.com"
+"0722302411121145"
+0589220167041585
+
+{"daxtra_resume.Resume.FileStruct.attachment.fname": "0589220167041585"}
