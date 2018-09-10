@@ -1,0 +1,23 @@
+{
+    "mapText": {
+        "prefix": "mapKey",
+        "body": [
+            "[Keyword(Name = \"$1\")]",
+            "[JsonProperty(\"candidateId)]",
+            "public Guid CandidateId { get; set; }",
+            ""  
+             ],
+        "description": "For Loop"
+    },
+    "mapKeyword": {
+        "prefix": "for",
+        "body": [
+          "for (const ${2:element} of ${1:array}) {",
+          "\t$0",
+          "}"
+        ],
+        "description": "For Loop"
+    }
+
+
+}

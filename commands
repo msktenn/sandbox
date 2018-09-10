@@ -1,7 +1,8 @@
 docker login -u msktenn1 -p RF7R85am9j57
 docker pull elasticsearch
-docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch
-docker run --name kibana -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana
+docker run --name elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch
+docker run --name kibana -e ELASTICSEARCH_URL=http://restrak.local:9200 -p 5601:5601 -d kibana
+
 docker run --link http://dceqlatldg02.dce.insightglobal.net:9200:elasticsearch -d kibana -p 5601:5601
 docker-compose up
 docker run --link http://dceqlatldg02.dce.insightglobal.net:9200:elasticsearch -d kibana -p 5601:5601
@@ -44,3 +45,20 @@ docker run --name kibana466 -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insight
 0589220167041585
 
 {"daxtra_resume.Resume.FileStruct.attachment.fname": "0589220167041585"}
+
+13 git checkout -b elasticMapper
+  14 git status
+  15 git commit -a -m"Mapping elastic data and testing"
+  16 git add -a
+  17 git add --all
+  18 git push
+  19 git pull
+  20 gti push --set-upstream origin elasticMapper
+  21 git push --set-upstream origin elasticMapper
+  22 git status
+  23 git commit -a -m"multithreading test"
+  24 git push
+  25 git pull origin master
+  26 git commit -a -m"Pulled Daily Changes To Master"
+  27 git push
+  28 git status
