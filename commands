@@ -1,7 +1,9 @@
 docker login -u msktenn1 -p RF7R85am9j57
 docker pull elasticsearch
 docker run --name elastic -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -d elasticsearch
-docker run --name kibana -e ELASTICSEARCH_URL=http://restrak.local:9200 -p 5601:5601 -d kibana
+docker run --name kibana -e ELASTICSEARCH_URL=http://172.16.130.60:9200 -p 5601:5601 -d kibana
+
+172.16.130.60
 
 docker run --link http://dceqlatldg02.dce.insightglobal.net:9200:elasticsearch -d kibana -p 5601:5601
 docker-compose up
@@ -10,13 +12,22 @@ docker run --link "http://dceqlatldg02.dce.insightglobal.net:9200":elasticsearch
 docker run --name kibana -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana...
 docker run --name kibana466 -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana:4.6.6...
 
+docker run --name elasticsearchhq  -p 5000:5000 -d elastichq/elasticsearch-hq
+
+curl DELETE "localhost:9200/testindex"
+
 .\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=./candidatev3map.json --type=mapping
 .\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=./candidatev3data.json --type=data
+
+
+.\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=./candidatev3map.json --type=mapping
+.\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=http://127.0.0.1:9200/candidate-v3 --type=data
 
 .\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/restrak-user --output=./restrakusermap.json --type=mapping
 .\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/restrak-user --output=./restrakuserdata.json --type=data
 
 .\node_modules\.bin\elasticdump.cmd --input=http://dceqlatldg02.dce.insightglobal.net:9200/candidate-v3 --output=./candidatev3data_500.json --type=data --size=1
+
 
 
 .\node_modules\.bin\elasticdump.cmd --input=./candidatev3map.json --output=http://127.0.0.1:9200/candidate-v3 --type=mapping
