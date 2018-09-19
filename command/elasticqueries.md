@@ -34,3 +34,11 @@ jitendra.jasthi@insightglobal.com
         }
     }
 }
+
+{
+    "query": {
+        "match": {
+            "contactInfo.email": "[email_address]"
+        }
+    }
+}

@@ -8,5 +8,7 @@ docker run --link http://dceqlatldg02.dce.insightglobal.net:9200:elasticsearch -
 docker run --link "http://dceqlatldg02.dce.insightglobal.net:9200":elasticsearch -d kibana -p 5601:5601
 docker run --name kibana -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana...
 docker run --name kibana466 -e ELASTICSEARCH_URL=http://dceqlatldg02.dce.insightglobal.net:9200 -p 5601:5601 -d kibana:4.6.6...
+
+docker pull elastichq/elasticsearch-hq
 docker run --name elasticsearchhq  -p 5000:5000 -d elastichq/elasticsearch-hq
 
