@@ -26,11 +26,12 @@ JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
 
-cd /etc/elasticsearch
+
 
 sudo dpkg -P openjdk-8-jdk
 sudo dpkg -P openjdk-11-jdk-headless
 
+curl -X DELETE "localhost:9200/twitter"
 
 
 
