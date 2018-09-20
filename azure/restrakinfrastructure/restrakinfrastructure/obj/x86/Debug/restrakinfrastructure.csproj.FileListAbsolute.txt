@@ -1,2 +1,0 @@
-/Users/mknight/code/sandbox/azure/restrakinfrastructure/restrakinfrastructure/obj/x86/Debug/restrakinfrastructure.csprojResolveAssemblyReference.cache
-/Users/mknight/code/sandbox/azure/restrakinfrastructure/restrakinfrastructure/obj/x86/Debug/restrakinfrastructure.csproj.CoreCompileInputs.cache
