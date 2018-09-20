@@ -7,7 +7,7 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 sudo apt install openjdk-11-jre-headless
-sudo apt-get update 
+sudo apt-get update
 sudo apt-get install elasticsearch
 
 sudo /bin/systemctl daemon-reload
@@ -26,14 +26,10 @@ JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 source /etc/environment
 echo $JAVA_HOME
 
-
+cd /etc/elasticsearch
 
 sudo dpkg -P openjdk-8-jdk
 sudo dpkg -P openjdk-11-jdk-headless
-
-
-0
-
 
 
 

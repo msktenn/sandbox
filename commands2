@@ -1,0 +1,30 @@
+--KeyCloak
+docker run -p 80:8080 -p 443:8443 --name=keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak
+docker exec -it  bash
+docker inspect container_name | grep IPAddress
+
+--IPAddress
+ifconfig | grep "inet " | grep -v 127.0.0.1
+
+
+--pbcopy
+cat datascan_gitlab.pub | pbcopy
+
+-- get certificates
+openssl s_client -tls1 -connect keycloak.azure:443 -showcerts
+
+
+-- keycloak configure
+keytool -genkey -alias keycloak.azure -keyalg RSA -keystore keycloak.jks -validity 10950
+keytool -certreq -alias keycloak.azure -keystore keycloak.jks > keycloak.careq
+keytool -import -keystore keycloak.jks -file root.crt -alias root
+docker run -p 8080:8080 --name=keycloak  -e KEYCLOAK_LOGLEVEL=DEBUG -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin jboss/keycloak
+<security-realm name="UndertowRealm">
+   <server-identities>
+       <ssl>
+           <keystore path="selfsigned.jks" relative-to="jboss.server.config.dir" keystore-password="password" />
+       </ssl>
+   </server-identities>
+</security-realm>
+
+<https-listener name="https" socket-binding="https" security-realm="UndertowRealm"/>
