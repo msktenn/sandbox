@@ -31,8 +31,9 @@ echo $JAVA_HOME
 sudo dpkg -P openjdk-8-jdk
 sudo dpkg -P openjdk-11-jdk-headless
 
-curl -X DELETE "localhost:9200/twitter"
+curl -X DELETE "137.116.86.72:9200/candidate"
 
+remove-item alias:curl
 
 
 

@@ -42,3 +42,34 @@ jitendra.jasthi@insightglobal.com
         }
     }
 }
+
+{
+    "query": {
+        "match": {
+            "contactInfo.candidateId": ""
+        }
+    }
+}
+
+
+{
+ "candidateId": "7f443ebe-2d63-49f6-9dfe-796035242106",
+ "name": {
+  "firstName": "Eric",
+  "lastName": "Hackett",
+  "fullName": "Eric Hackett"
+ },
+ "phoneNumber1": "3032468455",
+ "email": "hackett_eric@yahoo.com",
+ "address": {
+  "street": "1829 Godhania Rd.",
+  "city": "Edmond",
+  "state": "OK",
+  "zip": "73003",
+  "asCityStateString": "Edmond, OK",
+  "location": {
+   "lat": 35.668903,
+   "lon": -97.497383
+  }
+ }
+}
