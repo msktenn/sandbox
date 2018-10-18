@@ -1,0 +1,2 @@
+
+{!URLFOR($Action.yourobjectAPIName.New)}
