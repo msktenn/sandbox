@@ -3,6 +3,8 @@ docker run -p 80:8080 -p 443:8443 --name=keycloak -e KEYCLOAK_USER=admin -e KEYC
 docker exec -it  bash
 docker inspect container_name | grep IPAddress
 
+docker run --name redis -d redis -p 6379:6379
+
 --IPAddress
 ifconfig | grep "inet " | grep -v 127.0.0.1
 
