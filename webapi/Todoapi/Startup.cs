@@ -20,9 +20,28 @@ namespace Todoapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentityServer()
+                   .AddDeveloperSigningCredential()
+                   .AddInMemoryApiResources(Config.GetApiResources())
+                   .AddInMemoryClients(Config.GetClients());
+
+            services.AddMvcCore()
+             .AddAuthorization()
+             .AddJsonFormatters();
+
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:4000";
+                    options.RequireHttpsMetadata = false;
+
+                    options.ApiName = "api1";
+                });
+
+
             services.AddDbContext<TodoContext>(opt =>
-                           opt.UseInMemoryDatabase("TodoList"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+               opt.UseInMemoryDatabase("TodoList"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +56,9 @@ namespace Todoapi
                 app.UseHsts();
             }
 
+            app.UseIdentityServer();
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
