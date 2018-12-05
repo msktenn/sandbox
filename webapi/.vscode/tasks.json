@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "buildauthserver",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/authserver/authserver.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "buildwebapi",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/webapi/webapi.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build",
+            "dependsOn": ["buildauthserver", "buildwebapi"]
+        }
+        
+    ]
+}
