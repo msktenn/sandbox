@@ -8,7 +8,7 @@ docker run --name redis -d redis -p 6379:6379
 --IPAddress
 ifconfig | grep "inet " | grep -v 127.0.0.1
 
-
+cd 
 --pbcopy
 cat datascan_gitlab.pub | pbcopy
 
@@ -30,3 +30,15 @@ docker run -p 8080:8080 --name=keycloak  -e KEYCLOAK_LOGLEVEL=DEBUG -e KEYCLOAK_
 </security-realm>
 
 <https-listener name="https" socket-binding="https" security-realm="UndertowRealm"/>
+
+-- GO
+go get -u -v golang.org/x/lint/golint
+go get -u github.com/derekparker/delve/cmd/dlv
+  gocode
+  gopkgs
+  go-outline
+  go-symbols
+  guru
+  gorename
+  godef
+  goreturns
