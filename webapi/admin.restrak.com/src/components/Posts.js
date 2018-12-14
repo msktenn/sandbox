@@ -4,16 +4,18 @@ import { fetchPosts } from "../actions/postActions";
 
 class Posts extends Component {
   constructor() {
-    console.log("constructor");
+    console.log("constructor1");
+    super();
   }
 
-  static getDerivedStateFromProps() {
-    console.log("getdirevedstate");
-    this.props.fetchPosts();
-  }
+  // static getDerivedStateFromProps() {
+  //   console.log("getdirevedstate");
+  //   this.props.fetchPosts();
+  // }
 
   render() {
-    const postItems = this.state.posts.map(post => (
+    console.log("render");
+    const postItems = this.props.posts.map(post => (
       <div key={post.id}>
         <h3>{post.title}</h3>
         <p>{post.body}</p>
@@ -32,49 +34,53 @@ class Posts extends Component {
   }
 
   componentWillMount() {
+    this.props.fetchPosts();
     console.log("compoenentWillMount");
   }
 
-  shouldComponentUpdate() {
-    console.log("shouldComponentUpdate");
-  }
+  // shouldComponentUpdate() {
+  //   console.log("shouldComponentUpdate");
+  // }
 
-  getSnapshotBeforeUpdate() {
-    console.log("getSnapshotBeforeUpdate");
-  }
+  // getSnapshotBeforeUpdate() {
+  //   console.log("getSnapshotBeforeUpdate");
+  // }
 
-  componentDidUpdate() {
-    console.log("componentDidUpdate");
-  }
+  // componentDidUpdate() {
+  //   console.log("componentDidUpdate");
+  // }
 
-  componentWillUpdate() {
-    console.log("componentWilUpdate");
-  }
+  // componentWillUpdate() {
+  //   console.log("componentWilUpdate");
+  // }
 
-  componentWillReceiveProps() {
-    console.log("componentWillRecieveProps");
-  }
+  // componentWillReceiveProps() {
+  //   console.log("componentWillRecieveProps");
+  // }
 
-  componentWillUnmount() {
-    console.log("componentWillUnmount");
-  }
+  // componentWillUnmount() {
+  //   console.log("componentWillUnmount");
+  // }
 
-  static getDerivedStateFromError() {
-    console.log("getDerivedStateFromError");
-  }
+  // static getDerivedStateFromError() {
+  //   console.log("getDerivedStateFromError");
+  // }
 
-  compoentDidCatch() {
-    console.log("componentDidCatch");
-  }
+  // compoentDidCatch() {
+  //   console.log("componentDidCatch");
+  // }
 
-  setState()
-  {
-    parent.setState()
-
-  }
+  // setState()
+  // {
+  //   super.setState()
+  // }
 }
 
+const mapStateToProps = state => ({
+  posts: state.posts.items
+})
+
 export default connect(
-  null,
+  mapStateToProps,
   { fetchPosts }
 )(Posts);

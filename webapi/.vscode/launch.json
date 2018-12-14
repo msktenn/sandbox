@@ -8,6 +8,13 @@
         {
             "type": "chrome",
             "request": "launch",
+            "name": "Launch Chrome admin.restrak.com",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/admin.restrak.com"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/my-app"

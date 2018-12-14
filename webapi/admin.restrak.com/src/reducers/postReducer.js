@@ -4,8 +4,10 @@ const initialState = {
   item: {}
 };
 
+
+
 export default function(state = initialState, action) {
-  console.log("postreducer");
+  console.log("postreducer1");
   switch (action.type) {
     case FETCH_POSTS:
       return {
@@ -13,6 +15,7 @@ export default function(state = initialState, action) {
         items: action.payload
       };
     default:
+      console.log("state" + action.type);
       return state;
   }
 }
