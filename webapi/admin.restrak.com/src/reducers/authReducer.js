@@ -1,22 +1,18 @@
-import { FETCH_POSTS, NEW_POST } from '../actions/types';
-const initialState = {
-  items: [],
-  item: {},
-};
+import { LOGIN, LOGOUT } from '../actions/types';
+
+const initialState = { Authentication: { isAuthenticated: false } };
 
 export default function(state = initialState, action) {
   console.log('postreducer1');
   switch (action.type) {
-    case FETCH_POSTS:
+    case LOGIN:
       return {
         ...state,
-        items: action.payload,
       };
 
-    case NEW_POST:
+    case LOGOUT:
       return {
         ...state,
-        item: action.payload,
       };
 
     default:
@@ -24,5 +20,3 @@ export default function(state = initialState, action) {
       return state;
   }
 }
-
-
