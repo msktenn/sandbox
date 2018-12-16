@@ -25,6 +25,7 @@ class Main extends Component {
     return (
       <Router>
         <main>
+          <div>foo</div>
           <Header />
           <Switch>
             <Route exact path="/" component={Login} />
