@@ -1,7 +1,6 @@
 scp -rp ubuntu_bash_profile restrak@137.116.86.72:./.bash_profile
 
-ssh restrak@137.116.86.72
-letsmakemoney*8
+ssh restrak@137.116.86.72 [pwd]
 
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 sudo apt-get install apt-transport-https
