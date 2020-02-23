@@ -1,4 +1,3 @@
-
 import * as vscode from 'vscode';
 import { SymbolKind } from 'vscode';
 import * as assert from 'assert';
@@ -22,7 +21,7 @@ class SymbolNode {
 	symbolInfo?: vscode.DocumentSymbol;
 	_range?: vscode.Range;
 
-	constructor(symbolinfo: vscode.DocumentSymbol) {
+	constructor(symbolinfo?: vscode.DocumentSymbol) {
 		this.symbolInfo = symbolinfo;
 		this.children = [];
 	}
@@ -73,13 +72,15 @@ class SymbolNode {
 				// end: either at the start of the node's next sibling (if any), or at the end of the node's parent
 				let end;
 				if (i + 1 < this.children.length) {
-					end = this.children[i + 1].symbolInfo.range.start;
+					end = this.children[i + 1].symbolInfo?.range.start;
 				} else {
-					end = this._range.end;
+					end = this._range?.end;
 				}
 
-				child._range = new vscode.Range(start, end);
-				child.computeChildRanges();
+				if (!isNullOrUndefined(end)) {
+					child._range = new vscode.Range(start, end);
+					child.computeChildRanges();
+				}
 			}
 		}
 	}
@@ -93,7 +94,7 @@ class SymbolNode {
 	}
 
 	public get range() {
-		return this._range || this.symbolInfo.range;
+		return this._range || this.symbolInfo?.range;
 	}
 
 	public addNode(node: SymbolNode) {
@@ -105,7 +106,13 @@ class SymbolNode {
 		if (this.isRoot) {
 			return true;
 		} else if (properRanges) {
-			return this.range.contains(node.symbolInfo.range.end);
+			let endPosition = node.symbolInfo?.range.end;
+			if (!isNullOrUndefined(endPosition)) {
+				return this.range?.contains(endPosition);
+			}
+			else {
+				return false;
+			}
 		} else {
 			// No proper ranges, fallback to heuristics.
 			// Assume no nested namespaces/classes/functions.
@@ -130,7 +137,7 @@ class SymbolNode {
 		if (this.isRoot) {
 			return true;
 		}
-		return this.range.contains(pos);
+		return this.range?.contains(pos);
 	}
 
 	public getFullName() {
@@ -140,8 +147,11 @@ class SymbolNode {
 		let node: SymbolNode = this;
 		let nameList: string[] = [];
 		do {
-			nameList.push(node.symbolInfo.name);
-			node = node.parent;
+			let name = node.symbolInfo?.name;
+			if (!isNullOrUndefined(name) && !isNullOrUndefined(node.parent)) {
+				nameList.push(name);
+				node = node.parent;
+			}
 		} while (node && !node.isRoot);
 		return nameList.reverse().join('.');
 	}
@@ -173,11 +183,10 @@ class CancelUpdateError implements Error {
 }
 
 export class ScopeFinder {
-	private _symbolRoot: SymbolNode;
-	private _symbols: vscode.DocumentSymbol[];
-	private _updated;
-	private _cancelToken: vscode.CancellationTokenSource;
-	private static _dummyNode = new SymbolNode(null);
+	private _symbolRoot?: SymbolNode;
+	private _updated: Boolean;
+	private _cancelToken?: vscode.CancellationTokenSource;
+	private static _dummyNode = new SymbolNode(undefined);
 
 	constructor(private _doc: vscode.TextDocument) {
 		this._updated = true;
@@ -191,8 +200,8 @@ export class ScopeFinder {
 		return this._doc;
 	}
 
-	private getSymbols(): Thenable<vscode.DocumentSymbol[]> {
-		assert.equal(vscode.window.activeTextEditor.document, this._doc);
+	private getSymbols(): Thenable<vscode.DocumentSymbol[] | undefined> {
+		assert.equal(vscode.window.activeTextEditor?.document, this._doc);
 		return vscode.commands.executeCommand('vscode.executeDocumentSymbolProvider', this._doc.uri);
 	}
 
@@ -232,12 +241,12 @@ export class ScopeFinder {
 		this._symbolRoot = SymbolNode.createSymbolTree(symbols);
 	}
 
-	public async getScopeNode(pos: vscode.Position): Promise<SymbolNode> {
+	public async getScopeNode(pos: vscode.Position): Promise<SymbolNode | null> {
 		await this.updateNode();
 		if (!this._symbolRoot) {
 			return null;
 		}
-		let target: SymbolNode = null;
+		let target: SymbolNode | null = null;
 		for (let node of this._symbolRoot.iterNodesRevers()) {
 			if (node.containsPos(pos)) {
 				target = node;
@@ -255,11 +264,11 @@ interface NavigationItem extends vscode.QuickPickItem {
 
 export class ScopeSymbolProvider {
 	// TODO: cache necessary?
-	private _scopeFinder: ScopeFinder;
+	private _scopeFinder?: ScopeFinder;
 	private _status: vscode.StatusBarItem;
 
-	private _lastPos: vscode.Position;
-	private _cancelToken: vscode.CancellationTokenSource;
+	private _lastPos?: vscode.Position;
+	private _cancelToken?: vscode.CancellationTokenSource;
 
 	constructor(context: vscode.ExtensionContext) {
 		this._status = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
@@ -289,7 +298,7 @@ export class ScopeSymbolProvider {
 				this.updateStatus();
 				return;
 			}
-			this._lastPos = null;
+			this._lastPos = undefined;
 			this._scopeFinder = new ScopeFinder(e.document);
 			this.updateStatus(e.selection.start);
 		});
@@ -305,11 +314,17 @@ export class ScopeSymbolProvider {
 			this._scopeFinder = new ScopeFinder(e.document);
 		});
 
-		vscode.commands.registerCommand(this._status.command, async () => {
-			let selection = vscode.window.activeTextEditor.selection;
-			let node = await this._scopeFinder.getScopeNode(selection.start);
-			this.showScopeSymbols(node);
-		});
+		if (!isNullOrUndefined(this._status.command)) {
+			vscode.commands.registerCommand(this._status.command, async () => {
+				let selection = vscode.window.activeTextEditor?.selection;
+				if (!isNullOrUndefined(selection) && !isNullOrUndefined(this._scopeFinder)) {
+					let node = await this._scopeFinder.getScopeNode(selection.start);
+					if (!isNullOrUndefined(node)) {
+						this.showScopeSymbols(node);
+					}
+				}
+			});
+		}
 	}
 
 	private refreshNavigateCommand() {
@@ -342,9 +357,11 @@ export class ScopeSymbolProvider {
 			if (this._lastPos === pos) {
 				return;
 			}
-			let node: SymbolNode;
+			let node: SymbolNode | null = null;
 			try {
-				node = await this._scopeFinder.getScopeNode(pos);
+				if (!isNullOrUndefined(this._scopeFinder)) {
+					node = await this._scopeFinder.getScopeNode(pos);
+				}
 			} catch (err) {
 				if (err.name === 'CancelUpdateError') {
 					return;
@@ -354,29 +371,34 @@ export class ScopeSymbolProvider {
 			if (!node) {
 				// The updateNode call may reject by timeout, use an empyty node for now
 				// and refresh the status next time
-				node = this._scopeFinder.dummyNode;
+				if (!isNullOrUndefined(this._scopeFinder)) {
+					node = this._scopeFinder.dummyNode;
+				}
 				this.updateStatus(pos, 1000);
 			}
-			this._status.text = node.getFullName();
+			if (!isNullOrUndefined(node)) {
+				this._status.text = node.getFullName();
+			}
 			this._status.show();
 
 		}, delay ? delay : 32, this._cancelToken.token);
 	}
 
 	private onSelectNavigationItem(item: NavigationItem) {
-		if (!item) {
+		if (!item || isNullOrUndefined(vscode.window.activeTextEditor)) {
 			return;
 		}
 		let node = item.node;
-		vscode.window.activeTextEditor.revealRange(
-			node.range, vscode.TextEditorRevealType.Default);
+		if (!isNullOrUndefined(node.range)) {
+			vscode.window.activeTextEditor.revealRange(node.range, vscode.TextEditorRevealType.Default);
 
-		let pos = node.range.start;
-		let newSelection = new vscode.Selection(pos, pos);
-		vscode.window.activeTextEditor.selection = newSelection;
+			let pos = node.range.start;
+			let newSelection = new vscode.Selection(pos, pos);
+			vscode.window.activeTextEditor.selection = newSelection;
+		}
 	}
 
-	private findScopeParent(node: SymbolNode): SymbolNode {
+	private findScopeParent(node?: SymbolNode): SymbolNode | null {
 		const ShowType = [
 			SymbolKind.Class,
 			SymbolKind.Namespace,
@@ -404,15 +426,15 @@ export class ScopeSymbolProvider {
 			assert(subNode.symbolInfo);
 			// TODO: find a way for showing custom icon
 			let item = <NavigationItem>{
-				label: '$(tag)  ' + subNode.symbolInfo.name,
+				label: '$(tag)  ' + subNode.symbolInfo?.name,
 				description: parentName,
 				node: subNode
 			};
 			return item;
 		});
 
-		let oldRanges = vscode.window.activeTextEditor.visibleRanges;
-		let oldSelections = vscode.window.activeTextEditor.selections;
+		let oldRanges = vscode.window.activeTextEditor?.visibleRanges;
+		let oldSelections = vscode.window.activeTextEditor?.selections;
 
 		let target = await vscode.window.showQuickPick(items, {
 			placeHolder: parent.getFullName(),
@@ -422,8 +444,10 @@ export class ScopeSymbolProvider {
 
 		if (!target) {
 			// Didn't select any one, recover the position
-			vscode.window.activeTextEditor.revealRange(oldRanges[0]);
-			vscode.window.activeTextEditor.selections = oldSelections;
+			if (!isNullOrUndefined(vscode.window.activeTextEditor) && !isNullOrUndefined(oldRanges) && !isNullOrUndefined(oldSelections)) {
+				vscode.window.activeTextEditor.revealRange(oldRanges[0]);
+				vscode.window.activeTextEditor.selections = oldSelections;
+			}
 			return;
 		}
 		this.onSelectNavigationItem(target);

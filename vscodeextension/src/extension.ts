@@ -42,13 +42,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "widgetsphere" is now active!');
+	console.log('Congratulations, your extension "michaelknight" is now active!');
 
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('widgetsphere.test.debug', () => {
+	let disposable = vscode.commands.registerCommand('michaelknight.test.debug', () => {
 		if (!isNullOrUndefined(window.activeTextEditor)) {
 			getClassName().then(function (className) {
 				getFileName().then(function (fileName) {
@@ -59,7 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		}
 	});
-	let disposable2 = vscode.commands.registerCommand('widgetsphere.test.runlast', () => {
+	let disposable2 = vscode.commands.registerCommand('michaelknight.test.runlast', () => {
 		vscode.commands.executeCommand('dotnet.test.debug', LastTest.getInstance().lastMethodName, LastTest.getInstance().lastFileName, 'xunit');
 	});
 	context.subscriptions.push(disposable);

@@ -1,7 +1,8 @@
 {
-	"name": "widgetsphere",
-	"displayName": "Widgetsphere Goodies",
+	"name": "michaelknightvscode",
+	"displayName": "Michael Knight Vscode Extensions",
 	"description": "Commands for quick implementations",
+	"publisher": "michaelknight",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.42.0"
@@ -10,19 +11,19 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:widgetsphere.test.debug",
-		"onCommand:widgetsphere.test.runlast"
+		"onCommand:michaelknight.test.debug",
+		"onCommand:michaelknight.test.runlast"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "widgetsphere.test.debug",
-				"title": "Widgetshere: Debug"
+				"command": "michaelknight.test.debug",
+				"title": "MK: Debug"
 			},
 			{
-				"command": "widgetsphere.test.runlast",
-				"title": "Widgetshere: Re-run"
+				"command": "michaelknight.test.runlast",
+				"title": "MK: Re-run"
 			}
 		]
 	},
@@ -46,5 +47,9 @@
 		"mocha": "^7.0.1",
 		"typescript": "^3.7.5",
 		"vscode-test": "^1.3.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/msktenn/sandbox.git"
 	}
 }
