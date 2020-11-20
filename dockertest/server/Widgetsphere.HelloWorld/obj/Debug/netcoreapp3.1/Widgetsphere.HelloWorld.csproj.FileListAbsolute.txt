@@ -1,0 +1,12 @@
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/bin/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.deps.json
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/bin/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.runtimeconfig.json
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/bin/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.runtimeconfig.dev.json
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/bin/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.dll
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/bin/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.pdb
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/obj/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.csprojAssemblyReference.cache
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/obj/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.AssemblyInfoInputs.cache
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/obj/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.AssemblyInfo.cs
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/obj/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.csproj.CoreCompileInputs.cache
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/obj/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.dll
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/obj/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.pdb
+/Users/dad/code/sandbox/dockertest/server/Widgetsphere.HelloWorld/obj/Debug/netcoreapp3.1/Widgetsphere.HelloWorld.genruntimeconfig.cache
