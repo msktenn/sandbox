@@ -1,0 +1,15 @@
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/bin/Debug/net5.0/Restrike.AWS.Configure.deps.json
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/bin/Debug/net5.0/Restrike.AWS.Configure.runtimeconfig.json
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/bin/Debug/net5.0/Restrike.AWS.Configure.runtimeconfig.dev.json
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/bin/Debug/net5.0/Restrike.AWS.Configure.dll
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/bin/Debug/net5.0/ref/Restrike.AWS.Configure.dll
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/bin/Debug/net5.0/Restrike.AWS.Configure.pdb
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.csprojAssemblyReference.cache
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.AssemblyInfoInputs.cache
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.AssemblyInfo.cs
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.csproj.CoreCompileInputs.cache
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.dll
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/ref/Restrike.AWS.Configure.dll
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.pdb
+/Users/dad/code/sandbox/awscognito/Restrike.AWS.Configure/obj/Debug/net5.0/Restrike.AWS.Configure.genruntimeconfig.cache

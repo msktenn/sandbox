@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Restrike.AWS.Configure/1.0.0": {
+        "runtime": {
+          "Restrike.AWS.Configure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Restrike.AWS.Configure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
