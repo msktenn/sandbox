@@ -1,0 +1,43 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Run Cmake",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "/Users/dad/code/sandbox/clang/build",
+                "--config",
+                "Debug",
+                "--target",
+                "all",
+                "--",
+                "-j",
+                "14"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+        },
+        {
+            "type": "shell",
+            "label": "Parse MakeI wa",
+            "command": "cmake",
+            "args": [
+                "--no-warn-unused-cli",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
+                "-DCMAKE_BUILD_TYPE:STRING=Debug",
+                "-DCMAKE_C_COMPILER:FILEPATH=/usr/bin/clang",
+                "-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++",
+                "-H/Users/dad/code/sandbox/clang",
+                "-B/Users/dad/code/sandbox/clang/build",
+                "-G",
+                "\"Unix Makefiles\"",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+        }
+    ],
+    "version": "2.0.0"
+}
