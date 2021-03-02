@@ -95,7 +95,7 @@ void outputfilenames(std::string path)
         if (entry.is_directory())
         {
             std::cout << "dir:  " << filenameStr << '\n';
-            outputfilenames(entry.path());
+            // outputfilenames(entry.path());
         }
         else if (entry.is_regular_file())
         {
