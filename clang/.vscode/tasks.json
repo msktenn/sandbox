@@ -21,6 +21,21 @@
         },
         {
             "type": "shell",
+            "label": "Run Cmake Min Size",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "/Users/dad/code/sandbox/clang/build/release",
+                "-DCMAKE_BUILD_TYPE=ReLeAsE",
+                "--target",
+                "all"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+        },
+        {
+            "type": "shell",
             "label": "Parse MakeI wa",
             "command": "cmake",
             "args": [

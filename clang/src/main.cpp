@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string>
 #include "sha.h"
+#include "md5.h"
 #include "cryptlib.h"
 #include "channels.h"
 #include "filters.h"
@@ -19,22 +20,34 @@ void shahash(std::string fileName)
 
     try
     {
-        std::string s1, s2;
+        std::string s1, s2, s3, s4, s5, s6;
         CRC32 crc;
         SHA1 sha1;
+        SHA256 sha256;
+        SHA512 sha512;
+        MD5 md5;
 
         HashFilter f1(crc, new HexEncoder(new StringSink(s1)));
         HashFilter f2(sha1, new HexEncoder(new StringSink(s2)));
+        HashFilter f3(sha256, new HexEncoder(new StringSink(s3)));
+        HashFilter f4(sha512, new HexEncoder(new StringSink(s4)));
+        HashFilter f5(md5, new HexEncoder(new StringSink(s5)));
 
         ChannelSwitch cs;
         cs.AddDefaultRoute(f1);
         cs.AddDefaultRoute(f2);
+        cs.AddDefaultRoute(f3);
+        cs.AddDefaultRoute(f4);
+        cs.AddDefaultRoute(f5);
 
         FileSource(fileName.c_str(), true, new Redirector(cs));
 
         std::cout << "Filename: " << fileName << std::endl;
         std::cout << "   CRC32: " << s1 << std::endl;
         std::cout << "    SHA1: " << s2 << std::endl;
+        std::cout << "    SHA256: " << s3 << std::endl;
+        std::cout << "    SHA512: " << s4 << std::endl;
+        std::cout << "    MD5: " << s5 << std::endl;
     }
     catch (const Exception &ex)
     {

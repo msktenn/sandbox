@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.19.6)
 project(rssnapshot VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 17)
 
-
-
 macro(print_all_variables)
     message(STATUS "print_all_variables------------------------------------------{")
     get_cmake_property(_variableNames VARIABLES)
