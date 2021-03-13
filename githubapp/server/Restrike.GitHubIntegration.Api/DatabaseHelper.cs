@@ -30,8 +30,7 @@ namespace Restrike.GitHubIntegration.Api
             ConnectionString = connectionString;
             _dbOptions = new DbContextOptionsBuilder<GitHubIntegrationEntities>()
                  .UseLazyLoadingProxies()
-                // .UseNpgsql(connectionString)
-                 .UseInMemoryDatabase(connectionString)
+                 .UseNpgsql(connectionString)
                  .Options;
             return _dbOptions;
         }
@@ -41,11 +40,10 @@ namespace Restrike.GitHubIntegration.Api
             ConnectionString = connectionString;
             _dbOptions = new DbContextOptionsBuilder<GitHubIntegrationEntities>()
                  .UseLazyLoadingProxies()
-                //  .UseSqlServer(connectionString, builder =>
-                //  {
-                //      builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-                //  })
-                 .UseInMemoryDatabase(connectionString)
+                 .UseSqlServer(connectionString, builder =>
+                 {
+                     builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                 })
                  .Options;
             return _dbOptions;
         }

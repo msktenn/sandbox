@@ -14,6 +14,37 @@
             "cwd": "${workspaceFolder}/Restrike.GitHubIntegration.Api",
             "stopAtEntry": false,
             "console": "internalConsole"
+        },
+        {
+            "name": "Launch Postgres Installer",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build: Solution",
+            "program": "${workspaceFolder}/Restrike.GitHubIntegration.PostgresInstall/bin/Debug/net5.0/Restrike.GitHubIntegration.PostgresInstall.dll",
+            "args": [
+                "--create=true",
+                "--masterdb=Server=localhost;Database=postgres;UID=postgres;PWD=PgDbFun#1;",
+                "--connectionstring=Server=localhost;Database=githubintegration;UID=postgres;PWD=PgDbFun#1;",
+                "--newdatabase=githubintegration",
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Launch Postgres Upgrader",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build: Solution",
+            "program": "${workspaceFolder}/Restrike.GitHubIntegrationt.PostgresInstall/bin/Debug/net5.0/Restrike.GitHubIntegration.PostgresInstall.dll",
+            "args": [
+                "--connectionstring=Server=localhost;Database=githubintegration;UID=postgres;PWD=PgDbFun#1;",
+                "--dataserver=postgres",
+                "--acceptwarnings=all",
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
         }
     ]
 }
