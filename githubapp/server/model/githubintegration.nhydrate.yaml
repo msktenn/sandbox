@@ -1,0 +1,14 @@
+Id: 708d9890-1cb1-4d50-be86-2f82697a5b95
+CompanyName: Restrike
+EmitSafetyScripts: true
+DefaultNamespace: ""
+ProjectName: GitHubIntegration
+UseUTCTime: false
+Version: 0.0.0.0
+TenantColumnName: __tenant_user
+CreatedByColumnName: CreatedBy
+CreatedDateColumnName: CreatedDate
+ModifiedByColumnName: ModifiedBy
+ModifiedDateColumnName: ModifiedDate
+ConcurrencyCheckColumnName: __concurrency
+GrantExecUser: ""

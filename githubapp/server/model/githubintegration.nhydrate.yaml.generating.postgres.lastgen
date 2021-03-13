@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<modelRoot guid="708d9890-1cb1-4d50-be86-2f82697a5b95" type="nHydrate.Generator.nHydrateGeneratorProject" assembly="nHydrate.Generator.dll">
+		<ModelRoot key="708d9890-1cb1-4d50-be86-2f82697a5b95" projectName="GitHubIntegration" supportLegacySearchObject="0" useUTCTime="False" version="0.0.0.0" companyName="Restrike" emitSafetyScripts="1" tenantColumnName="__tenant_user" defaultNamespace="" storedProcedurePrefix="gen">
+				<database createdByColumnName="CreatedBy" createdDateColumnName="CreatedDate" modifiedByColumnName="ModifiedBy" modifiedDateColumnName="ModifiedDate" timestampColumnName="__concurrency" fullIndexSearchColumnName="full_index_text" grantExecUser="" databaseName="">
+						<columns>
+								<c key="dad33b29-2b32-465d-a152-6d97584faf1d" primaryKey="1" identity="1" name="ID" dataFieldSortOrder="0" isIndexed="1" isUnique="1" id="257419980" type="8" allowNull="0">
+										<pt key="0f78a590-0b7e-43ce-8b60-4931fbf63b31" ref="104906052" refType="1" />
+								</c>
+								<c key="fb0998d4-4896-49eb-83e1-5f599f23bf44" name="Text" dataFieldSortOrder="1" length="0" id="533340788" type="22" allowNull="0">
+										<pt key="0f78a590-0b7e-43ce-8b60-4931fbf63b31" ref="104906052" refType="1" />
+								</c>
+								<c key="7552c9ef-66ad-4454-80b7-d784d5303208" name="Name" dataFieldSortOrder="2" id="1053299345" type="22" allowNull="0">
+										<pt key="0f78a590-0b7e-43ce-8b60-4931fbf63b31" ref="104906052" refType="1" />
+								</c>
+						</columns>
+						<customviewcolumns />
+						<relations />
+						<tables>
+								<t key="0f78a590-0b7e-43ce-8b60-4931fbf63b31" name="ConfigSetting" dbschema="" description="Store global settings" id="104906052">
+										<r />
+										<til>
+												<ti key="9fb2a1d3-b44e-4798-abe9-09abd521f691" isUnique="1" primaryKey="1" clustered="1" id="2025861704">
+														<ticl>
+																<tic ascending="1" fieldID="dad33b29-2b32-465d-a152-6d97584faf1d" id="0" />
+														</ticl>
+												</ti>
+										</til>
+										<c>
+												<f key="dad33b29-2b32-465d-a152-6d97584faf1d" ref="257419980" refType="0" />
+												<f key="fb0998d4-4896-49eb-83e1-5f599f23bf44" ref="533340788" refType="0" />
+												<f key="7552c9ef-66ad-4454-80b7-d784d5303208" ref="1053299345" refType="0" />
+										</c>
+										<staticData />
+								</t>
+						</tables>
+						<customviews />
+				</database>
+				<versionHistoryList />
+		</ModelRoot>
+</modelRoot>

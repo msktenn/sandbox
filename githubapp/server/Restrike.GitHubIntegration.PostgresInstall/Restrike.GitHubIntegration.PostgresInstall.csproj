@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <StartupObject>Restrike.GitHubIntegration.PostgresInstall.Program</StartupObject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Core.System.Configuration.Install" Version="1.1.0" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+        <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+        <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+        <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+        <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.6.0" />
+        <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.1.0" />
+        <PackageReference Include="System.Management" Version="4.7.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="System.Configuration.Install">
+            <HintPath>System.Configuration.Install</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="DatabaseInstaller.cs">
+            <SubType>Component</SubType>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="5_Programmability\Views\Model\Views.pgsql" />
+        <EmbeddedResource Include="1_UserDefinedInitialization\UnVersioned\UnversionedUpgradeScript.pgsql" />
+        <EmbeddedResource Include="GenerationDetails.txt" />
+        <EmbeddedResource Include="2_Upgrade Scripts\0000_0000_0000_0000_0001_UpgradeScript.pgsql" />
+        <EmbeddedResource Include="3_GeneratedTablesAndData\1_CreateSchema.pgsql" />
+        <EmbeddedResource Include="3_GeneratedTablesAndData\3_CreateRelations.pgsql" />
+        <EmbeddedResource Include="3_GeneratedTablesAndData\2_CreateData.pgsql" />
+    </ItemGroup>
+</Project>

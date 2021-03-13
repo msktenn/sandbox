@@ -1,0 +1,36 @@
+Name: ConfigSetting
+Id: 0f78a590-0b7e-43ce-8b60-4931fbf63b31
+AllowCreateAudit: true
+AllowModifyAudit: true
+AllowTimestamp: true
+Summary: Store global settings
+Fields:
+- Name: ID
+  Id: dad33b29-2b32-465d-a152-6d97584faf1d
+  Datatype: Int
+  Nullable: false
+  Identity: Database
+  IsIndexed: true
+  IsPrimaryKey: true
+  IsUnique: true
+  Length: 4
+- Name: Text
+  Id: fb0998d4-4896-49eb-83e1-5f599f23bf44
+  Datatype: VarChar
+  Nullable: false
+  Length: 0
+- Name: Name
+  Id: 7552c9ef-66ad-4454-80b7-d784d5303208
+  Datatype: VarChar
+  Nullable: false
+  Length: 50
+Relations: []
+Indexes:
+- Clustered: true
+  Id: 9fb2a1d3-b44e-4798-abe9-09abd521f691
+  IndexType: PrimaryKey
+  IsUnique: true
+  Fields:
+  - FieldId: dad33b29-2b32-465d-a152-6d97584faf1d
+    FieldName: ID
+StaticData: []

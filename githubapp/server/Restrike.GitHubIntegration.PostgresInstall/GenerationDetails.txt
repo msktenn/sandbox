@@ -1,0 +1,14 @@
+DO NOT MODIFY THIS FILE. IT IS ALWAYS OVERWRITTEN ON GENERATION.
+Generation Details
+
+Version 0.0.0.0
+Table Count: 1
+Tenant Table Count: 0
+View Count: 0
+
+TABLE LIST
+ConfigSetting, ColumnCount=3, IsTenant=False
+    Field: [ConfigSetting].[ID], Not Nullable, Primary Key, AutoNumber, Unique, Indexed
+    Field: [ConfigSetting].[Name], Field Length: 50, Not Nullable
+    Field: [ConfigSetting].[Text], Field Length: max, Not Nullable
+
