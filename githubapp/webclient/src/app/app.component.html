@@ -1,0 +1,11 @@
+hello world 1
+<ul>
+  <li *ngFor="let item of items; let i = index">
+    {{i}} {{item}}
+  </li>
+
+  <button (click)="githubLogin()">GitHub Login</button>
+</ul>
+
+<!-- main app container -->
+<router-outlet></router-outlet>

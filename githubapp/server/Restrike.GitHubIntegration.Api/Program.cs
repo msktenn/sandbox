@@ -12,25 +12,25 @@ namespace Restrike.GitHubIntegration.Api
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) {
-                        IConfiguration Configuration = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile("appsettings.development.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables()
-                    .AddCommandLine(args)
-                    .Build();
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            IConfiguration Configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.development.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .AddCommandLine(args)
+                .Build();
             Log.Logger = new LoggerConfiguration()
-                 .ReadFrom.Configuration(Configuration)
-                 .WriteTo.Console()
-                 .CreateLogger();
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger();
             Log.Information("Rest API: Started");
 
             var host = Host.CreateDefaultBuilder(args)
-                 .ConfigureWebHostDefaults(webBuilder =>
-                 {
-                     webBuilder.UseStartup<Startup>();
-                 })
-                 .UseSerilog();
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                })
+                .UseSerilog();
             return host;
 
         }

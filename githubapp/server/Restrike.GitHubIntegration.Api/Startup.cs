@@ -136,9 +136,6 @@ namespace Restrike.GitHubIntegration.Api
                          .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                          .RequireAuthenticatedUser()
                          .Build());
-
-
-
             });
 
             services.AddHttpContextAccessor();
@@ -148,7 +145,6 @@ namespace Restrike.GitHubIntegration.Api
                 var clientMappingOptions = options.ClientErrorMapping;
                 options.InvalidModelStateResponseFactory = context => new CustomUnprocessableEntityObjectResult(context.ModelState, clientMappingOptions, context.HttpContext);
             });
-
 
 
         }
@@ -186,6 +182,7 @@ namespace Restrike.GitHubIntegration.Api
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

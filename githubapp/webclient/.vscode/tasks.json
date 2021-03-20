@@ -1,0 +1,26 @@
+{
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "generate",
+      "problemMatcher": [],
+      "label": "npm: generate",
+      "detail": "ng-openapi-gen -c ng-openapi-gen.local.json"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build",
+      "detail": "ng build"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "label": "npm: start",
+      "detail": "ng serve"
+    }
+  ]
+}
