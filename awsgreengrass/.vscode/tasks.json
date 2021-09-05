@@ -1,0 +1,224 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build: Foda.SecureIt.API",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.API/Foda.SecureIt.API.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Foda.SecureIt.API.Tests",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.API.Tests/Foda.SecureIt.API.Tests.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Foda.SecureIt.EFDAL",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.EFDAL/Foda.SecureIt.EFDAL.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Foda.SecureIt.Install",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.API/Foda.SecureIt.API.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Foda.SecureIt.PostgresInstall",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.PostgresInstall/Foda.SecureIt.PostgresInstall.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Foda.SecureIt.RestAPI",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.RestAPI/Foda.SecureIt.RestAPI.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Foda.SecureIt.RestAPI.Tests",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.RestAPI.Tests/Foda.SecureIt.RestAPI.Tests.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: ModelProject",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/ModelProject/ModelProject.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Foda.SecureIt.VulnImport",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.VulnImport/Foda.SecureIt.VulnImport.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Build: Solution",
+			"group": "build",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"build",
+				"${workspaceFolder}/Foda.SecureIt.sln",
+				"/property:GenerateFullPaths=true"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "Launch SqlServer Installer",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"${workspaceFolder}/Foda.SecureIt.Install/bin/Debug/net5.0/Foda.SecureIt.Install.dll",
+				"/create",
+				"/newdb:restrike",
+				"/master:\"Server=localhost;Database=master;UID=sa;PWD=SqlDbFun@1;\"",
+				"/connectionstring:\"Server=localhost;Database=restrike;UID=sa;PWD=SqlDbFun@1;\"",
+				"/logsql:SqlLog.log"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+		},
+		{
+			"label": "Launch SqlServer Upgrade",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"${workspaceFolder}/Foda.SecureIt.Install/bin/Debug/net5.0/Foda.SecureIt.Install.dll",
+				"/update",
+				"/connectionstring:\"Server=localhost;Database=restrike;UID=sa;PWD=SqlDbFun@1;\"",
+				"/logsql:SqlLog.log",
+				"/showsql"
+			],
+		},
+		{
+			"label": "Launch Postgres Upgrade",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"${workspaceFolder}/Foda.SecureIt.PostgresInstall/bin/Debug/net5.0/Foda.SecureIt.PostgresInstall.dll",
+				"/update",
+				"/connectionstring:\"Server=localhost;Database=restrike;UID=postgres;PWD=PgDbFun#1;\"",
+				"/logsql:SqlLog.log",
+				"/showsql"
+			],
+		},
+		{
+			"label": "Import Vulns From NVDB",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"${workspaceFolder}/Foda.SecureIt.VulnImport/bin/Debug/net5.0/Foda.SecureIt.VulnImport.dll",
+				"/stashfolder:/Users/dad/code/temp/NVDB",
+				"/import"
+			],
+		},
+		{
+			"label": "Move Vulns From Files To DB",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"${workspaceFolder}/Foda.SecureIt.VulnImport/bin/Debug/net5.0/Foda.SecureIt.VulnImport.dll",
+				"/stashfolder:/Users/dad/code/temp/NVDB",
+				"/parsedb"
+			],
+		},
+	]
+}

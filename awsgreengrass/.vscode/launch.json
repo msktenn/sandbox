@@ -1,0 +1,126 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Rest API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/Foda.SecureIt.RestAPI/bin/Debug/net5.0/Foda.SecureIt.RestAPI.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Foda.SecureIt.RestAPI",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch Task Service",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/Foda.SecureIt.TaskService/bin/Debug/net5.0/Foda.SecureIt.TaskService.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Foda.SecureIt.TaskService",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch Postgres Installer",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/Foda.SecureIt.PostgresInstall/bin/Debug/net5.0/Foda.SecureIt.PostgresInstall.dll",
+      "args": [
+        "--create=true",
+        "--masterdb=Server=localhost;Database=postgres;UID=postgres;PWD=PgDbFun#1;",
+        "--connectionstring=Server=localhost;Database=restrike;UID=postgres;PWD=PgDbFun#1;",
+        "--newdatabase=restrike",
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch Postgres Upgrader",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/Foda.SecureIt.PostgresInstall/bin/Debug/net5.0/Foda.SecureIt.PostgresInstall.dll",
+      "args": [
+        "--connectionstring=Server=localhost;Database=restrike;UID=postgres;PWD=PgDbFun#1;",
+        "--dataserver=postgres",
+        "--acceptwarnings=all",
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch Vuln Importer",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/Foda.SecureIt.VulnImport/bin/Debug/net5.0/Foda.SecureIt.VulnImport.dll",
+      "args": [
+        "--importtodb=true",
+        "--downloadvulns=false",
+        "--stashfolder=./stashfolder",
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch SqlServer Installer",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/Foda.SecureIt.Install/bin/Debug/net5.0/Foda.SecureIt.Install.dll",
+      "args": [
+        "/create",
+        "/newdb:restrike",
+        "/master:Server=localhost;Database=master;UID=sa;PWD=SqlDbFun@1;",
+        "/connectionstring:Server=localhost;Database=restrike;UID=sa;PWD=SqlDbFun@1;",
+        "/logsql:SqlLog.log"
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch SqlServer Upgrade",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/Foda.SecureIt.Install/bin/Debug/net5.0/Foda.SecureIt.Install.dll",
+      "args": [
+        "/update",
+        "/connectionstring:Server=localhost;Database=restrike;UID=sa;PWD=SqlDbFun@1;",
+        "/logsql:SqlLog.log",
+        "/showsql"
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Launch Model Project",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build: Solution",
+      "program": "${workspaceFolder}/ModelProject/bin/Debug/net5.0/ModelProject.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ]
+}
