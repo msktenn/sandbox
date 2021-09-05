@@ -1,4 +1,6 @@
+using System;
 using Microsoft.Extensions.Configuration;
+using Restrike.GitHubIntegration.Api;
 
 namespace Restrike.GitHubIntegration.Tests
 {
@@ -16,6 +18,16 @@ namespace Restrike.GitHubIntegration.Tests
 
             this.Token = configuration["Token"];
             this.BaseUrl = configuration["BaseUrl"];
+
+            #region Configure Database
+            var connectionString = configuration["ConnectionString"];
+            if (configuration["DataServer"]?.ToLower() == "postgres")
+                DatabaseHelper.SetupPostgres(connectionString);
+            else if (configuration["DataServer"]?.ToLower() == "sql")
+                DatabaseHelper.SetupSqlServer(connectionString);
+            else
+                throw new Exception("Invalid configuration");
+            #endregion
         }
     }
 }
