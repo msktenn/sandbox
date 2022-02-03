@@ -103,11 +103,14 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$PATH:/usr/local/git/bin:/sw/bin/:/usr/local/:/usr/local/sbin:/usr/local/mysql/bin"
 export PATH="$PATH:/Users/wofsure/Applications/TFSE"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.7/bin"
+export PATH="$PATH:/usr/local/opt/liquibase/bin"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export PATH="$PATH:/opt/flutter/bin"
 
+export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 export BLOCKSIZE=1k
-export JAVA_HOME=/Library/Java/Home
-
+export JAVA_HOME=/usr/local/opt/java
+export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
 
 
 alias cp='cp -iv'                           # Preferred 'cp' implementation
@@ -143,6 +146,9 @@ alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
 alias 4x='cd ~/code/4x/wms/fourx'
 alias setup='cd ~/code/4x/dev-env/setup/mac'
 alias 4xdomain='cd ~/Oracle/Middleware/wls12130/user_projects/domains/fourxDomain'
+alias dr='docker'
+alias pg_start="launchctl load ~/Library/LaunchAgents"
+alias pg_stop="launchctl unload ~/Library/LaunchAgents"
 hf () { history | grep "$@"; }
 
 #   lr:  Full Recursive Directory Listing
@@ -157,6 +163,12 @@ ffs () { /usr/bin/find . -name "$@"'*' 2>&1 | grep -v "find:"; }  # ffs:      Fi
 ffe () { /usr/bin/find . -name '*'"$@" 2>&1 | grep -v "find:"; }  # ffe:      Find file whose name ends with a given string
 ffc () { /usr/bin/find . -name '*'"$@"'*' 2>&1 | grep -v "find:"; }  # ffe:      Find file whose name ends with a given string
 
+# Searching Docker Volume
+dff () {docker run --rm -i -v=$1:/tmp/myvolume busybox find '/tmp/myvolume/' -name "$2" 2>&1 | grep -v "find:"; }  # ffe:      Find file whose name ends with a given string
+dffc () {docker run --rm -i -v=$1:/tmp/myvolume busybox find '/tmp/myvolume/' -name '*'"$2"'*' 2>&1 | grep -v "find:"; }  # ffe:      Find file whose name ends with a given string
+dll () { docker run --rm -i -v=$1:/tmp/myvolume busybox ls -FlAhp '/tmp/myvolume/'"$2" }
+dv () {docker volume $1 $2}
+
 # Command Shell stuff
 showa () { /usr/bin/grep --color=always -i -a1 $@ ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc ; }
 #showa () { /usr/bin/grep --color=always -i -a1 $@ ~/.zshrc | grep -v '^\s*$' | less -FSRXc ; }
@@ -168,7 +180,11 @@ alias numFiles='echo $(ls -1 | wc -l)'      # numFiles:     Count of non-hidden 
 alias make1mb='mkfile 1m ./1MB.dat'         # make1mb:      Creates a file of 1mb size (all zeros)
 alias make5mb='mkfile 5m ./5MB.dat'         # make5mb:      Creates a file of 5mb size (all zeros)
 alias make10mb='mkfile 10m ./10MB.dat'      # make10mb:     Creates a file of 10mb size (all zeros)
-
+delf () { find . -type f -name "$@" -exec rm '{}' + }   
+delfs () { find . -type f -name "$@"'*' -exec rm '{}' + }   
+delfe () { find . -type f -name '*'"$@" -exec rm '{}' + }   
+delfc () { find . -type f -name '*'"$@"'*' -exec rm '{}' + }   
+deld () {rm -r "$@"}
 
 #   ---------------------------
 #   5.  PROCESS MANAGEMENT
@@ -279,3 +295,42 @@ httpHeaders () { /usr/bin/curl -I -L $@ ; }             # httpHeaders:      Grab
 #   httpDebug:  Download a web page and show info on what took time
 #   -------------------------------------------------------------------
 httpDebug () { /usr/bin/curl $@ -o /dev/null -w "dns: %{time_namelookup} connect: %{time_connect} pretransfer: %{time_pretransfer} starttransfer: %{time_starttransfer} total: %{time_total}\n" ; }
+
+#.netenvironment
+export ASPNETCORE_ENVIRONMENT="development"
+
+#
+# AWS Helpers
+. ~/code/app.restrike.io/src-deploy/.restrike-profile.sh
+
+#
+# Docker Helpers
+dri () {docker rmi $(docker images | grep "$1")}
+drc () {docker rm $(docker ps -a | grep "$1")}
+di () {docker images | grep "$1"}
+dps () {docker ps | grep "$1"}
+dpsa () {docker ps -a | grep "$1"}
+
+#
+# Git Helpers
+gic () {git commit -a -m"$1";}
+gipl () {git pull --rebase}
+gips () {git push}
+gia () {git add -A}
+giac () {git add -A; git commit -a -m"$1";}
+gis () {git status}
+gicb () {git checkout -b $1}
+gic () {git checkout $1}
+gim () {git merge $1}
+
+#nhydrate generator
+export SUPPLYCHAIN_HOME="/Users/dad/code/app.restrike.io"
+export SANDBOX_HOME="/Users/dad/code/sandbox"
+export NHYDRATE_HOME="/Users/dad/code/nHydrate/Source/nHydrate.Command.Core/bin/Debug/net5.0"
+export NHYDRATE_GENERATORS="nHydrate.Generator.EFCodeFirstNetCore.EFCodeFirstNetCoreProjectGenerator,nHydrate.Generator.PostgresInstaller.PostgresDatabaseProjectGenerator"
+ngen() {dotnet $NHYDRATE_HOME/nHydrate.Command.Core.dll "$@"}
+ngenr() { ngen --model="$SUPPLYCHAIN_HOME/src/ModelProject/vuln.nhydrate" --generators="$NHYDRATE_GENERATORS" --output="$SUPPLYCHAIN_HOME/src" }
+ngengit() { ngen --model="$SANDBOX_HOME/githubapp/server/model/githubintegration.nhydrate.yaml" --generators="$NHYDRATE_GENERATORS" --output="$SANDBOX_HOME/githubapp/server" }
+
+set -o vi
+
