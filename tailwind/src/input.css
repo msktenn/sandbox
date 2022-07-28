@@ -13,3 +13,11 @@
 .btn-blue:hover {
   @apply bg-blue-400;
 }
+
+main {
+  grid-template-columns: minmax(275px, auto) 1fr;
+}
+
+main p {
+  padding: 4rem;
+}
