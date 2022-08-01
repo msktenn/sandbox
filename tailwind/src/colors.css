@@ -6,6 +6,10 @@ header {
   @apply bg-red-200;
 }
 
+.seperator {
+  @apply bg-red-200 text-white text-xl;
+}
+
 .workspace {
   @apply bg-blue-100;
 }
