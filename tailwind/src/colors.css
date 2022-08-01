@@ -1,0 +1,15 @@
+header {
+  @apply bg-gray-700 text-white;
+}
+
+.sidenav {
+  @apply bg-red-200;
+}
+
+.workspace {
+  @apply bg-blue-100;
+}
+
+footer {
+  @apply bg-gray-700 text-white;
+}

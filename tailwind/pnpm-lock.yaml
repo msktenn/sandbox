@@ -1,9 +1,13 @@
 lockfileVersion: 5.4
 
 specifiers:
+  postcss: ^8.4.14
+  postcss-import: ^14.1.0
   tailwindcss: ^3.1.6
 
 devDependencies:
+  postcss: registry.npmjs.org/postcss/8.4.14
+  postcss-import: registry.npmjs.org/postcss-import/14.1.0_postcss@8.4.14
   tailwindcss: registry.npmjs.org/tailwindcss/3.1.6
 
 packages:

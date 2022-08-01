@@ -1,0 +1,39 @@
+main {
+  /* @apply divide-x divide-green-300;*/
+  grid-template-columns: minmax(18rem, auto) 1rem 1fr;
+  @apply overflow-y-auto flex-1 grid;
+}
+
+main p {
+  padding: 4rem;
+}
+
+header {
+  @apply py-5 text-center;
+}
+
+body {
+  @apply flex flex-col h-screen;
+}
+
+.sidenav {
+  @apply p-5 overflow-y-auto;
+  padding: 0;
+}
+
+.seperator {
+}
+
+.seperator > .startline {
+}
+
+.seperator > .endline {
+}
+
+.workspace {
+  @apply overflow-y-auto;
+}
+
+footer {
+  @apply py-5 text-center;
+}
