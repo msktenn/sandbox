@@ -11,7 +11,7 @@ SELECT 'DROP USER pixls_admin;'
 WHERE EXISTS (SELECT FROM pg_user WHERE usename = 'pixls_admin')\gexec
 
 SELECT 'DROP ROLE tenant_admin;'
-WHERE EXISTS (SELECT FROM pg_roles WHERE usename = 'tenant_admin')\gexec
+WHERE EXISTS (SELECT FROM pg_roles WHERE rolname = 'tenant_admin')\gexec
 
 SELECT 'DROP ROLE tenant_user;'
 WHERE EXISTS (SELECT FROM pg_roles WHERE rolname = 'tenant_user')\gexec
