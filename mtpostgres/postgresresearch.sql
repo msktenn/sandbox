@@ -4,8 +4,9 @@ WHERE pg_stat_activity.datname = 'pixls' -- ← change this to your DB
   AND pid <> pg_backend_pid();
 DROP DATABASE pixls;
 
-select * from pg_user
-select * from pg_roles
+select * from pg_user;
+select * from pg_roles;
+
 
 SELECT DISTINCT usename
 FROM pg_stat_activity;

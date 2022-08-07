@@ -11,6 +11,6 @@ SELECT 'CREATE ROLE tenant_user INHERIT'
 WHERE NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname='tenant_user')\gexec
 
 --create user that will be allowed to create tenants
-CREATE USER pixls_admin WITH PASSWORD 'pixlsadminpw';
-GRANT tenantadmin TO pixlsadmin;
+CREATE USER pixls_admin WITH PASSWORD 'pixls_adminpw';
+GRANT tenant_admin TO pixls_admin;
 
