@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS t_questions (
 	tenant VARCHAR ( 20 ) NOT NULL DEFAULT current_user
 );
 
-CREATE VIEW questions AS
+CREATE OR REPLACE VIEW questions AS
     SELECT
         id,
         question_text
