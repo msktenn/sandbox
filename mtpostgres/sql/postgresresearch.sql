@@ -16,5 +16,10 @@ insert into questions (question_text) Values ('banana');
 
 select * from questions order by question_text;
 
+select * from pg_catalog.pg_tables where schemaname='public';
 
 
+SELECT 'CREATE DATABASE prismatest'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'prismatest')\gexec
+
+CREATE DATABASE prismatest
