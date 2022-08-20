@@ -12,8 +12,11 @@ pnpm dlx prisma migrate dev --name init
 pnpm dlx prisma migrate dev --create-only --name init
 pnpm dlx prisma migrate deploy
 
+#rollback
+pnpm dlx prisam migrate resolve --rolled-back "20220819190846_questions"
+
 #run
- pnpm ts-node index.ts
+pnpm ts-node index.ts
 ```
 
 ```evn

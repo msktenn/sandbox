@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: rainbowdash
+      labels: cs1
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address1
+                  type: varchar(50)
+              - column:
+                  name: address2
+                  type: varchar(50)
+              - column:
+                  name: city
+                  type: varchar(30)
+
+  - changeSet:
+      id: 2
+      author: rainbowdash
+      labels: cs2
+      comment: This is my commment 2
+      changes:
+        - createTable:
+            tableName: company
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address1
+                  type: varchar(50)
+              - column:
+                  name: address2
+                  type: varchar(50)
+              - column:
+                  name: city
+                  type: varchar(30)
+
+  - changeSet:
+      id: 3
+      author: bill
+      labels: cs3
+      comment: This is my example comment 3
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: country
+                  type: varchar(2)

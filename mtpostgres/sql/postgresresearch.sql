@@ -18,8 +18,14 @@ select * from questions order by question_text;
 
 select * from pg_catalog.pg_tables where schemaname='public';
 
+select * from pg_catalog.pg_views where schemaname='public';
+
 
 SELECT 'CREATE DATABASE prismatest'
 WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'prismatest')\gexec
 
-CREATE DATABASE prismatest
+DROP VIEW question
+DROP Table "Post"
+DROP TABLE "User"
+DROP TABLE "Profile"
+DR==
