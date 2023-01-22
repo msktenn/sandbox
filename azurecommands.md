@@ -122,3 +122,6 @@ az group delete --name preveri --no-wait --yes
 sudo systemctl restart rsyslog
 sudo systemctl daemon-reload
 ```
+
+
+gmp, bdw-gc, libffi, libtool, libunistring, pkg-config, guile, libidn2, libtasn1, nettle, p11-kit, libevent, unbound, gnutls, jansson and emacs
