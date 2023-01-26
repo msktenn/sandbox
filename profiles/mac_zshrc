@@ -111,6 +111,7 @@ export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 export BLOCKSIZE=1k
 export JAVA_HOME=/usr/local/opt/java
 export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
+export HOMEBREW_GITHUB_API_TOKEN=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
 
 
 alias cp='cp -iv'                           # Preferred 'cp' implementation
@@ -128,7 +129,7 @@ alias .3='cd ../../../'                     # Go back 3 directory levels
 alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
-alias edit='subl'                           # edit:         Opens any file in sublime editor
+alias edit='code'                           # edit:         Opens any file in sublime editor
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
@@ -226,7 +227,6 @@ my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
 #   ---------------------------
 #   6.  NETWORKING
 #   ---------------------------
-
 alias myip='curl ip.appspot.com'                    # myip:         Public facing IP Address
 alias netCons='lsof -i'                             # netCons:      Show all open TCP/IP sockets
 alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
@@ -260,8 +260,10 @@ ii() {
 #   ---------------------------------------
 #   7.  SYSTEMS OPERATIONS & INFORMATION
 #   ---------------------------------------
-
 alias mountReadWrite='/sbin/mount -uw /'    # mountReadWrite:   For use when booted into single-user
+
+alias duhs='du -hs'    # Size of current folder
+
 
 #   cleanupDS:  Recursively delete .DS_Store files
 #   -------------------------------------------------------------------
@@ -301,29 +303,180 @@ export ASPNETCORE_ENVIRONMENT="development"
 
 #
 # AWS Helpers
-. ~/code/app.restrike.io/src-deploy/.restrike-profile.sh
+#. ~/code/app.restrike.io/src-deploy/.restrike-profile.sh
 
+aliashelp() {
+    echo '
+    dalias
+    mkalias
+    kcalias
+    galias'
+}
 #
 # Docker Helpers
-dri () {docker rmi $(docker images | grep "$1")}
-drc () {docker rm $(docker ps -a | grep "$1")}
+dalias() {
+    echo '
+    dri docker remove image  
+    drc () {docker rm $(docker ps -a | grep "\w*\$1\w*")}
+    dstop () {docker stop "\$1"}
+    dstart () {docker start "\$1"}
+    di () {docker images | grep "\$1"}
+    dps () {docker ps | grep "\$1"}
+    dpsa () {docker ps -a | grep "\$1"}
+    drbash () {sudo docker run -it --entrypoint /bin/bash \$1}
+    dcb() {docker-compose -f "\$1" build --progress=plain --no-cache}
+    dcu() {docker-compose -f "\$1" up}
+    dcd() {docker-compose -f "\$1" down}
+    '
+}
+dri () {docker rmi $(docker images | grep -o "\w*$1\w*")}
+drc () {docker rm $(docker ps -a | grep "\w*$1\w*")}
+dstop () {docker stop "$1"}
+dstart () {docker start "$1"}
 di () {docker images | grep "$1"}
 dps () {docker ps | grep "$1"}
 dpsa () {docker ps -a | grep "$1"}
+drbash () {sudo docker run -it --entrypoint /bin/bash $1}
+dcb() {docker-compose -f "$1" build --progress=plain --no-cache}
+dcu() {docker-compose -f "$1" up}
+dcd() {docker-compose -f "$1" down}
+#docker-compose -f $imageLocation/$containerprefix-run.yml $addnetworkfile $addfluentdfile -p $envCode up -d
+#docker-compose -f $imageLocation/nginxproxy-run.yml -f $imageLocation/nginxproxy-run-$envCode.yml run --rm --entrypoint
+#docker-compose -f $imageLocation/$switch-run.yml -f $imageLocation/$switch-run-addnetwork.yml -p $envCode down 
+
+
+#
+# minikube helpers
+mkalias(){
+    echo '
+    alias mk="minikube"
+    mks () {minikube start --mount-string="$BLOCKCHAIN_HOME/ethereum/volumes:/data/eth"  --disk-size 50000mb --mount; eval $(minikube docker-env);}
+    mkeval() {eval $(minikube docker-env)}
+    mkstat () {minikube status}
+    mkstp () {minikube stop}
+    mkp () {minikube pause}
+    mkt () {minikube tunnel}
+    '    
+}
+alias mk='minikube'
+mks () {minikube start --mount-string="$BLOCKCHAIN_HOME/ethereum/volumes:/data/eth"  --disk-size 50000mb --mount; eval $(minikube docker-env);}
+mkeval() {eval $(minikube docker-env)}
+mkstat () {minikube status}
+mkstp () {minikube stop}
+mkp () {minikube pause}
+mkt () {minikube tunnel}
+
+#
+# kubernetes helpers helpers
+kcalias(){
+    echo '
+    alias kc="kubectl"
+    kcg () {kubectl get $1 $2 $3}
+    kcgn () {kubectl get nodes}
+    kcgs () {kubectl get services}
+    kcgp () {kubectl get pods}
+    kcgpv () {kubectl get pv}
+    kcgpvc () {kubectl get pvc}
+    kcgpw () {kubectl get pods -o wide}
+    kcgr () {kubectl get replicaset}
+    kcgss () {kubectl get statefulset}
+    kcgi () {kubectl get ingress}
+    kcgd () {kubectl get deployment}
+
+    kcrm () {kubectl delete $1 $2 $3}
+    kcrms () {kubectl delete service $1}
+    kcrmd () {kubectl delete deployment $1}
+    kcrmpv () {kubectl delete pv $1}
+    kcrmpvc () {kubectl delete pvc $1}
+
+    kcd () {kubectl describe $1 $2 $3}
+    kcdp () {kubectl describe pod/$1}
+    kcds () {kubectl describe service $1}
+
+    kccd () {kubectl create deployment $1 --image=$2}
+    kced () {kubectl edit deployment $1}
+    kca () {kubectl apply -f $1}
+
+    kcl () {kubectl logs $1}
+    kct () {kubectl exec -it $1 -- /bin/bash}
+    kctsh () {kubectl exec -it $1 -- /bin/sh}
+    '
+}
+alias kc='kubectl'
+kcg () {kubectl get $1 $2 $3}
+kcgn () {kubectl get nodes}
+kcgs () {kubectl get services}
+kcgp () {kubectl get pods}
+kcgpv () {kubectl get pv}
+kcgpvc () {kubectl get pvc}
+kcgpw () {kubectl get pods -o wide}
+kcgr () {kubectl get replicaset}
+kcgss () {kubectl get statefulset}
+kcgi () {kubectl get ingress}
+kcgd () {kubectl get deployment}
+
+kcrm () {kubectl delete $1 $2 $3}
+kcrms () {kubectl delete service $1}
+kcrmd () {kubectl delete deployment $1}
+kcrmpv () {kubectl delete pv $1}
+kcrmpvc () {kubectl delete pvc $1}
+
+kcd () {kubectl describe $1 $2 $3}
+kcdp () {kubectl describe pod/$1}
+kcds () {kubectl describe service $1}
+
+kccd () {kubectl create deployment $1 --image=$2}
+kced () {kubectl edit deployment $1}
+kca () {kubectl apply -f $1}
+
+kcl () {kubectl logs $1}
+kct () {kubectl exec -it $1 -- /bin/bash}
+kctsh () {kubectl exec -it $1 -- /bin/sh}
+
 
 #
 # Git Helpers
+galias(){
+    echo '
+    gic () {git commit -a -m"$1";}
+    gipl () {git pull --rebase}
+    gips () {git push}
+    gia () {git add -A}
+    giac () {git add -A; git commit -a -m"$1";}
+    gis () {git status}
+    gic () {git checkout $1}
+    gim () {git merge $1}
+    gibl () {git branch}
+    gibr () {git branch -r}ß
+    giba () {git branch -a}
+    gilbc () {git checkout -b $1}
+    gilbd () {git branch -d "$1"}
+    girbc () {git push --set-upstream origin "$1"}
+    girbd () {git push origin -d "$1"}
+    '    
+}
 gic () {git commit -a -m"$1";}
 gipl () {git pull --rebase}
 gips () {git push}
 gia () {git add -A}
 giac () {git add -A; git commit -a -m"$1";}
 gis () {git status}
-gicb () {git checkout -b $1}
 gic () {git checkout $1}
 gim () {git merge $1}
+gibl () {git branch}
+gibr () {git branch -r}
+giba () {git branch -a}
+gilbc () {git checkout -b $1}
+gilbd () {git branch -d "$1"}
+girbc () {git push --set-upstream origin "$1"}
+girbd () {git push origin -d "$1"}
+
+#
+# NPM Helpers
+nupdatedep () {npm i -g npm-check-updates;ncu -u}
 
 #nhydrate generator
+export BLOCKCHAIN_HOME="/Users/dad/code/blockchain/datashare"
 export SUPPLYCHAIN_HOME="/Users/dad/code/app.restrike.io"
 export SANDBOX_HOME="/Users/dad/code/sandbox"
 export NHYDRATE_HOME="/Users/dad/code/nHydrate/Source/nHydrate.Command.Core/bin/Debug/net5.0"
@@ -332,5 +485,18 @@ ngen() {dotnet $NHYDRATE_HOME/nHydrate.Command.Core.dll "$@"}
 ngenr() { ngen --model="$SUPPLYCHAIN_HOME/src/ModelProject/vuln.nhydrate" --generators="$NHYDRATE_GENERATORS" --output="$SUPPLYCHAIN_HOME/src" }
 ngengit() { ngen --model="$SANDBOX_HOME/githubapp/server/model/githubintegration.nhydrate.yaml" --generators="$NHYDRATE_GENERATORS" --output="$SANDBOX_HOME/githubapp/server" }
 
-set -o vi
 
+#shift-arrow() {
+#  ((REGION_ACTIVE)) || zle set-mark-command
+#  zle $1
+#}
+#for key  kcap seq        widget (
+#    left  LFT $'\e[1;2D' backward-char
+#    right RIT $'\e[1;2C' forward-char
+#    up    ri  $'\e[1;2A' up-line-or-history
+#    down  ind $'\e[1;2B' down-line-or-history
+#  ) {
+#  functions[shift-$key]="zle set-mark-command; zle backward-char"
+#  zle -N shift-$key
+#  bindkey ${terminfo[k$kcap]-$seq} shift-$key
+#}
