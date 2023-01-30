@@ -388,6 +388,7 @@ kcalias(){
     kcrmd () {kubectl delete deployment $1}
     kcrmpv () {kubectl delete pv $1}
     kcrmpvc () {kubectl delete pvc $1}
+    kcrmss () {kubectl delete statefulset $1}
 
     kcd () {kubectl describe $1 $2 $3}
     kcdp () {kubectl describe pod/$1}
@@ -420,6 +421,7 @@ kcrms () {kubectl delete service $1}
 kcrmd () {kubectl delete deployment $1}
 kcrmpv () {kubectl delete pv $1}
 kcrmpvc () {kubectl delete pvc $1}
+kcrmss () {kubectl delete statefulset $1}
 
 kcd () {kubectl describe $1 $2 $3}
 kcdp () {kubectl describe pod/$1}
