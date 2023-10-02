@@ -111,7 +111,7 @@ export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 export BLOCKSIZE=1k
 export JAVA_HOME=/usr/local/opt/java
 export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
-export HOMEBREW_GITHUB_API_TOKEN=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
+
 
 
 alias cp='cp -iv'                           # Preferred 'cp' implementation
