@@ -9,6 +9,7 @@
 *.sln.docstates
 *.db
 *.orig
+*.local*
 
 node_modules/
 
